@@ -135,5 +135,7 @@ def see_plot(request, slug):
             'slug': slug,
             'data_to_plot': data_to_plot,
             'type_of_plot': request.GET.get('type_of_plot')}
-    return render_to_response('reporting/plot.html', data,
+
+    return render_to_response('reporting/plot.html',
+                              data,
                               context_instance=RequestContext(request))
