@@ -1,12 +1,14 @@
 from django.db.models.fields.related import RelatedField
 from django.db.models.fields import DateField
 import datetime
-from django.utils.translation import get_date_formats, get_partial_date_formats, ugettext as _
+from django.utils.translation import ugettext as _
+from django.utils.formats import get_format
 from django.utils import dateformat
 from django.utils.safestring import mark_safe
 from django.template import Library
 
 register = Library()
+
 
 def get_date_model_field(model, lookup):
     parts = lookup.split('__')
@@ -34,7 +36,7 @@ def report_date_hierarchy(cl):
         year_lookup = cl.params.get(year_field)
         month_lookup = cl.params.get(month_field)
         day_lookup = cl.params.get(day_field)
-        year_month_format, month_day_format = get_partial_date_formats()
+        year_month_format, month_day_format = get_format()
 
         link = lambda d: mark_safe(cl.get_query_string(d, [field_generic]))
 

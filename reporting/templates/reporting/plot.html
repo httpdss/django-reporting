@@ -1,8 +1,8 @@
 {% extends "admin/base_site.html" %}
 {% load adminmedia admin_list reporting i18n %}
-
+{% load staticfiles %}
 {% block extrastyle %}
-  <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/changelists.css" />
+  <link rel="stylesheet" type="text/css" href="{% static "admin/css/changelists.css" %}" />
   <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}jqplot/jquery.jqplot.css"/>
   
   <style type="text/css">

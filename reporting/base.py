@@ -7,7 +7,7 @@ from django.db.models.fields import FieldDoesNotExist
 from django.utils.text import capfirst
 from django.core.urlresolvers import reverse
 
-from filterspecs import *
+from reporting.filterspecs import LookupFilterSpec, SimpleListFilter
 
 
 def get_model_field(model, name):
@@ -36,7 +36,8 @@ class ModelAdminMock(object):
     def queryset(self, request):
         return self.model.objects.all()
 
-GROUP_BY_VAR = 'gruop_by_'
+
+GROUP_BY_VAR = 'group_by_'
 SORT_VAR = 's'
 SORTTYPE_VAR = 'st'
 DETAILS_SWITCH_VAR = 'ds'
@@ -225,7 +226,11 @@ class Report(object):
                 except:
                     filter_specs.append(LookupFilterSpec(field_name, self.request, self.params, self.model, model_admin))
                     continue
-                spec = FilterSpec.create(field, self.request, self.params, self.model, model_admin)
+                spec = SimpleListFilter.create(field,
+                                         self.request,
+                                         self.params,
+                                         self.model,
+                                         model_admin)
                 if spec and spec.has_output():
                     filter_specs.append(spec)
         return filter_specs, bool(filter_specs)

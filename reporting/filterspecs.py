@@ -1,11 +1,11 @@
-from django.contrib.admin.filterspecs import FilterSpec
+from django.contrib.admin import SimpleListFilter
 from django.db.models.fields.related import RelatedField
 from django.template.defaultfilters import capfirst
 
 
-class LookupFilterSpec(FilterSpec):
+class LookupFilterSpec(SimpleListFilter):
     def __init__(self, f, request, params, model, model_admin):
-        FilterSpec.__init__(self, f, request, params, model, model_admin)
+        SimpleListFilter.__init__(self, f, request, params, model, model_admin)
         self.model = model
         self.lookup_val = request.GET.get(f, None)
 
