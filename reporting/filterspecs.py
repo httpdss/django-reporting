@@ -8,7 +8,7 @@ class LookupFilterSpec(FilterSpec):
         FilterSpec.__init__(self, f, request, params, model, model_admin)
         self.model = model
         self.lookup_val = request.GET.get(f, None)
-    
+
     def title(self):
         return capfirst(' '.join([i for i in self.field.split('__')]))
 
@@ -22,7 +22,7 @@ class LookupFilterSpec(FilterSpec):
             yield {'selected': self.lookup_val == id,
                    'query_string': cl.get_query_string({self.field: id}),
                    'display': display}
-    
+
     def _values(self, model, lookup):
         parts = lookup.split('__')
         field = model._meta.get_field(parts[0])
@@ -36,7 +36,7 @@ class LookupFilterSpec(FilterSpec):
             if field2.choices:
                 labels = dict(field2.choices)
                 return [(unicode(v), labels[v]) for v in values]
-            return [(v,v) for v in values]
+            return [(v, v) for v in values]
         next_lookup = '__'.join(parts[1:])
         return self._values(rel_model, next_lookup)
 

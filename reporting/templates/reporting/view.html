@@ -15,14 +15,14 @@
     		y = $('#y_axis').val();
     		to_add = "";
     		if ("{{for_csv|safe}}".length == 0){
-    			to_add_href = "type_of_plot="+type+"&x_axis="+x+"&y_axis="+y; 
+    			to_add_href = "type_of_plot="+type+"&x_axis="+x+"&y_axis="+y;
     		}else{
     			to_add_href = "&type_of_plot="+type+"&x_axis="+x+"&y_axis="+y;
     		}
     		window.location.href = "plot/?{{for_csv|safe}}"+to_add_href;
     	}
     </script>
-    
+
 {% endblock%}
 
 {% block bodyclass %}change-list{% endblock %}
@@ -33,7 +33,7 @@
 <div class="breadcrumbs">
      <a href="/admin/">{% trans "Home" %}</a> &rsaquo;
      <a href="{% url reporting-list %}">Reports</a> &rsaquo;
-     {{report.verbose_name}} 
+     {{report.verbose_name}}
 
 </div>
 {% endblock %}
@@ -43,12 +43,12 @@
 {% block content %}
 		  <div id="content-main">
 		    {% block object-tools %}{% endblock %}
-		    
+
 		     {% block date_hierarchy %}{% report_date_hierarchy report %}{% endblock %}
-		    
+
 		    <div class="module{% if cl.has_filters %} filtered{% endif %}" id="changelist">
-		
-		
+
+
 		      {% block filters %}
 				    <div id="changelist-filter">
 				      <h2>Download</h2>
@@ -76,7 +76,7 @@
 					      		{% else%}
 						      		{% for head in report.get_details_headers %}
 						      			<option value="{{head}}">{{head}}</option>
-						      		{% endfor %}				      		
+						      		{% endfor %}
 					      		{% endif%}
 				      		</select>
 				      	</li>
@@ -90,10 +90,10 @@
 					      		{% else%}
 						      		{% for head in report.get_details_headers %}
 						      			<option value="{{head}}">{{head}}</option>
-						      		{% endfor %}				      		
-					      		{% endif%}				      		
-				      		</select>				      	
-				      	</li>				      	
+						      		{% endfor %}
+					      		{% endif%}
+				      		</select>
+				      	</li>
 				      	<li>
 				      		<a href="#" onclick="see_plot();">See Plot</a>
 				      	</li>
@@ -112,10 +112,10 @@
 				      <h2>{% trans 'Filter' %}</h2>
 				      	{% for spec in report.filter_specs %}{% admin_list_filter report spec %}{% endfor %}
 				    {% endif %}
-				    </div>				
+				    </div>
 		      {% endblock %}
-		      
-		
+
+
 		      {% block result_list %}
 		      <div id="changelist" class="filtered">
 					<table>
@@ -166,7 +166,7 @@
 								{% endfor %}
 							</tr>
 						{% endif %}
-		
+
 					{% endif %}
 					{% endfor %}
 					{% if report.aggregate %}
@@ -176,7 +176,7 @@
 						{% endfor %}
 						{% if report.show_details %}
 							<td> </td>
-						{% endif %}			
+						{% endif %}
 						{% for title, value in report.get_aggregation %}
 							<td><strong>{{title}}: {{value}}</strong></td>
 						{% endfor %}

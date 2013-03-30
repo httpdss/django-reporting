@@ -17,7 +17,7 @@ def get_date_model_field(model, lookup):
         return model, lookup
     rel_model = field.rel.to
     if len(parts) == 1:
-        raise Exception('%s is not a date field' % lookup) 
+        raise Exception('%s is not a date field' % lookup)
     next_lookup = '__'.join(parts[1:])
     return get_date_model_field(rel_model, next_lookup)
 
@@ -26,7 +26,7 @@ def report_date_hierarchy(cl):
     if cl.date_hierarchy:
         model, field_name = get_date_model_field(cl.model, cl.date_hierarchy)
         rel_query_set = model.objects.all()
-         
+
         year_field = '%s__year' % cl.date_hierarchy
         month_field = '%s__month' % cl.date_hierarchy
         day_field = '%s__day' % cl.date_hierarchy
@@ -64,9 +64,9 @@ def report_date_hierarchy(cl):
         elif year_lookup:
             months = rel_query_set.filter(**{'%s__year' % field_name: year_lookup}).dates(field_name, 'month')
             return {
-                'show' : True,
+                'show': True,
                 'back': {
-                    'link' : link({}),
+                    'link': link({}),
                     'title': _('All dates')
                 },
                 'choices': [{
@@ -83,4 +83,5 @@ def report_date_hierarchy(cl):
                     'title': year.year
                 } for year in years]
             }
+
 report_date_hierarchy = register.inclusion_tag('admin/date_hierarchy.html')(report_date_hierarchy)
