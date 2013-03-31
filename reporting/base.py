@@ -224,13 +224,17 @@ class Report(object):
                 try:
                     field = self.get_field(field_name)
                 except:
-                    filter_specs.append(LookupFilterSpec(field_name, self.request, self.params, self.model, model_admin))
+                    filter_specs.append(LookupFilterSpec(field_name,
+                                                         self.request,
+                                                         self.params,
+                                                         self.model,
+                                                         model_admin))
                     continue
                 spec = SimpleListFilter.create(field,
-                                         self.request,
-                                         self.params,
-                                         self.model,
-                                         model_admin)
+                                               self.request,
+                                               self.params,
+                                               self.model,
+                                               model_admin)
                 if spec and spec.has_output():
                     filter_specs.append(spec)
         return filter_specs, bool(filter_specs)
